@@ -7,8 +7,8 @@ const APP_SHELL = [
   "./data.js",
   "./manifest.json",
   "./Mulgi_valla_vapp.svg.webp",
-  "./icon-192.webp",
-  "./icon-512.webp"
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {
