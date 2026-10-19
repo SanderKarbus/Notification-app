@@ -260,3 +260,17 @@ GitHub Pagesi seadistus
   repo Pagesi õigustest.
 - Kohalikud käivitusfailid jäävad reposse, kuid Pages serveerib rakenduse
   staatilisi faile ja kasutab "index.html" alguspunktina.
+
+ETAPP 3.2 TÖÖLOGI
+Kuupäev: 19. oktoober 2026
+
+Pagesi esimese avaldamise vea parandamine
+-----------------------------------------
+- Esimene Pagesi workflow jõudis failide laadimiseni, kuid ebaõnnestus sammus
+  „Seadista Pages”.
+- GitHub teatas, et repo Pagesi sait ei ole veel aktiveeritud.
+- Lisasin configure-pages sammule parameetri "enablement: true", et workflow
+  prooviks Pagesi saiti automaatselt aktiveerida.
+- Kui GitHubi konto või private-repo pakett ei luba Pagesi automaatset
+  aktiveerimist, tuleb see üks kord käsitsi aktiveerida:
+  Settings → Pages → Build and deployment → Source: GitHub Actions.
