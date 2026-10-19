@@ -4,6 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#17335d">
+  <meta name="description" content="Mulgi valla teated ja sündmused ühes kohas.">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.webp">
   <title>Mulgi vald — teated</title>
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -104,5 +107,10 @@
   </div>
   <script src="data.js"></script>
   <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && window.location.protocol !== "file:") {
+      window.addEventListener("load", () => navigator.serviceWorker.register("service-worker.js"));
+    }
+  </script>
 </body>
 </html>

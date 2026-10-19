@@ -1,0 +1,25 @@
+{
+  "name": "Mulgi vald — teated ja sündmused",
+  "short_name": "Mulgi vald",
+  "description": "Mulgi valla teated ja sündmused ühes kohas.",
+  "lang": "et",
+  "start_url": "./index.html#home",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f5f7fa",
+  "theme_color": "#17335d",
+  "icons": [
+    {
+      "src": "icon-192.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}

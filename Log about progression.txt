@@ -274,3 +274,21 @@ Pagesi esimese avaldamise vea parandamine
 - Kui GitHubi konto või private-repo pakett ei luba Pagesi automaatset
   aktiveerimist, tuleb see üks kord käsitsi aktiveerida:
   Settings → Pages → Build and deployment → Source: GitHub Actions.
+
+ETAPP 3.3 TÖÖLOGI
+Kuupäev: 19. oktoober 2026
+
+PWA aluse loomine
+-----------------
+- Lisasin faili "manifest.json", mis kirjeldab rakenduse nime, ikooni,
+  värve, avavaadet ja standalone-kuva.
+- Lisasin faili "service-worker.js", mis salvestab rakenduse põhifailid
+  seadme vahemällu.
+- Service worker ei püüa väliseid Mulgi valla ega Kultuurikava API-päringuid
+  vahemällu, vaid jätab need värske info jaoks otse võrku.
+- Võrguühenduse katkemisel saab rakendus laadida vahemälus oleva rakenduse
+  põhivaate.
+- Lisasin Androidi ja iOS-i jaoks manifesti ikooniviited.
+- Lisatud manifest ja service worker registreeritakse ainult veebiaadressil;
+  otse "file://" avamisel neid ei registreerita.
+- Kohalik server oskab nüüd manifesti JSON-faili õige sisutüübiga serveerida.
