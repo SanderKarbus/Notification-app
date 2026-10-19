@@ -247,3 +247,16 @@ Meeldetuletuse visuaalne demo
 - Hüpikakna saab sulgeda nupust.
 - Tegemist on esitlusdemoga; see ei kasuta veel telefoni operatsioonisüsteemi
   päris-teavitust.
+
+ETAPP 3.1 TÖÖLOGI
+Kuupäev: 19. oktoober 2026
+
+GitHub Pagesi seadistus
+-----------------------
+- Lisasin GitHub Actionsi töövoo faili ".github/workflows/pages.yml".
+- Iga "main" harusse tehtud push käivitab staatilise rakenduse avaldamise.
+- Töövoog kasutab GitHub Pagesi ametlikke Actionsi samme.
+- Rakenduse repo võib jääda private'iks; nähtavus sõltub GitHubi konto ja
+  repo Pagesi õigustest.
+- Kohalikud käivitusfailid jäävad reposse, kuid Pages serveerib rakenduse
+  staatilisi faile ja kasutab "index.html" alguspunktina.
