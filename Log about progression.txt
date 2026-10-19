@@ -1,0 +1,249 @@
+ETAPI 1 TÖÖLOGI
+Kuupäev: 14. oktoober 2026
+Projekt: NotificationAPP
+
+Eesmärk
+-------
+Korrastada olemasolev HTML/CSS/JavaScripti prototüüp nii, et sellest oleks võimalik
+edasi ehitada päris mobiilirakendus, mis näitab ainult sündmusi ja teadaandeid.
+
+Tehtud
+------
+1. Lõin eraldi andmekihi faili "data.js".
+   - Näidisandmed ei ole enam kasutajaliidese loogikaga läbisegi.
+   - Igal teatel ja sündmusel on nüüd kordumatu tunnus.
+   - Sündmustel on detailne kirjeldus ja teadetel pikem sisu.
+   - Andmekihi saab järgmises etapis asendada Mulgi valla veebilehe ühendusega.
+
+2. Korrastasin "app.js" faili.
+   - Lisatud ühtne andmete kuvamise loogika.
+   - Lisatud HTML-i turvaline tekstiks muutmine enne kuvamist.
+   - Lisatud laadimise olek.
+   - Lisatud tühja tulemuse olek teatefiltrile.
+   - Lisatud veaolek olukorraks, kus soovitud sisu ei leita.
+   - Filtrid "Kõik", "Oluline" ja "Üldine" töötavad edasi.
+
+3. Lisasin teadete detailvaate.
+   - Teate kaardile vajutades avaneb täispikk teade.
+   - Detailvaates kuvatakse teate liik, pealkiri, kuupäev ja sisu.
+   - Detailvaatest saab tagasi minna.
+
+4. Lisasin sündmuste detailvaate.
+   - Sündmuse kaardile vajutades avaneb sündmuse detail.
+   - Detailvaates kuvatakse kuupäev, koht, kellaaeg ja kirjeldus.
+   - Detailvaates on valmis kasutajaliidese koht meeldetuletuse funktsioonile.
+   - Telefoni päris-meeldetuletus lisatakse eraldi etapis koos mobiilirakenduse
+     teavituste võimalusega.
+
+5. Säilitasin olemasoleva visuaalse ülesehituse.
+   - Avaleht, teated, sündmused ja seaded on endiselt eraldi vaated.
+   - Olemasolev mobiilne paigutus jäi alles.
+   - Navigatsioon töötab URL-i hash-viidete kaudu.
+
+Kontroll
+--------
+- Kõikide muudetud failide probleemikontroll: vigu ei leitud.
+- Rakendus avati brauseris.
+- Kontrollitud sündmuste nimekirja kuvamine.
+- Kontrollitud sündmuse detailvaate avamine.
+- Kontrollitud teadete nimekirja kuvamine.
+- Kontrollitud, et näidisandmed jõuavad uue andmekihi kaudu kasutajaliidesesse.
+
+Veel tegemata
+-------------
+- Ühendus Mulgi valla sündmuste kalendriga.
+- Ühendus Mulgi valla teadaannete konkreetse allikaga.
+- Telefoni päris-teavitused ja sündmuse meeldetuletused.
+- Capacitori Androidi/iOS-i projekti loomine.
+
+Järgmine etapp
+--------------
+Selgitada välja Mulgi valla sündmuste kalendri ja teadaannete täpsed
+masinloetavad allikad ning ühendada need "data.js" asemele rakenduse andmekihiga.
+
+ETAPP 2 TÖÖLOGI
+Kuupäev: 14. oktoober 2026
+
+Eesmärk
+-------
+Ühendada rakendus päris Mulgi valla sündmuste ja teadete allikatega ning
+vältida kogu veebilehe üldise uudisvoo kasutamist.
+
+Tehtud
+------
+1. Ühendasin teated otse Mulgi valla WordPressi API-ga.
+   - Kasutatav kategooria on "Uudised ja teated" (kategooria tunnus 1).
+   - Rakendus ei kasuta üldist RSS-voogu.
+   - Seetõttu ei jõua rakendusse kogu veebilehe juhuslik sisu ega galeriid.
+   - Teate detailvaade kasutab nüüd postituse täielikku sisu.
+   - Teatele jääb alles link algallikale Mulgi valla veebilehel.
+
+2. Ühendasin sündmused otse Mulgi valla lehel kasutatava Kultuurikava vidinaga.
+   - Kasutatud vidina tunnus on af68b005502ca6d738249657707037b20f46dfe0.
+   - Rakendus küsib sündmusi alates tänasest kuni 90 päeva ette.
+   - Kuvatakse sündmuse nimi, kuupäev, kellaaeg ja koht.
+   - Sündmuse detailvaates on link algsele sündmusele Kultuurikavas.
+
+3. Asendasin näidisandmed pärisandmete laadimisega.
+   - "data.js" sisaldab nüüd allikate aadresse ja andmete teisendamist.
+   - WordPressi ja Kultuurikava vastused teisendatakse rakenduse enda vormingusse.
+   - Sündmused järjestatakse kuupäeva järgi.
+   - Kuupäevad ja kellaajad vormindatakse Eesti lokaadi järgi.
+
+4. Lisasin selged ühenduse veateated.
+   - Kui teated või sündmused ei ole kättesaadavad, näidatakse rakenduses veateadet.
+   - Rakendus ei asenda ebaõnnestunud pärisühendust vaikselt vanade
+     näidisandmetega.
+   - Veateave kirjutatakse ka brauseri konsooli.
+
+Kontroll
+--------
+- Kontrollitud Mulgi valla WordPressi API vastus.
+- Kontrollitud Kultuurikava sündmuste API vastus.
+- Kontrollitud mõlema allika päringud brauseris.
+- Kontrollitud, et avalehel kuvatakse päris teated.
+- Kontrollitud, et avalehel kuvatakse päris sündmused.
+- Muudetud JavaScripti ja CSS-i probleemikontroll ei leidnud vigu.
+
+Märkus
+------
+Praegune otselugemine töötab veebirakenduse prototüübis. Mobiilirakenduse
+pakendamisel tuleb kontrollida sama ühenduse toimimist Androidi ja iOS-i
+võrguturbe reeglitega. Kui mõni pood või platvorm otselugemist piirab, lisame
+hiljem väikese vahendaja, mis edastab samad kaks allikat rakendusele.
+
+ETAPP 2.1 TÖÖLOGI
+Kuupäev: 14. oktoober 2026
+
+Eesmärk
+-------
+Hoida värske info tavavaates, näidata viimase seitsme päeva möödunud sündmusi
+ja teateid eraldi heledamas jaotises ning eemaldada vanemad kirjed vaatest.
+
+Tehtud
+------
+- Tänased ja tulevased teated ning sündmused jäävad tavavaatesse.
+- Viimase 7 päeva möödunud kirjed kuvatakse eraldi jaotises „Hiljuti möödunud”.
+- Hiljutine jaotis on visuaalselt heledam ja väiksema läbipaistmatusega.
+- Kirjed, mis on tänasest vähemalt 7 päeva vanemad, jäetakse kuvamata.
+- Sündmuste päringusse lisati ka eelneva 7 päeva ajavahemik, et möödunud
+  sündmusi saaks eraldi jaotises näidata.
+- Teadetele ja sündmustele lisati täpne ISO-kuupäev vanuse arvutamiseks.
+- Teadete filtrid rakenduvad nüüd nii aktiivsele kui ka hiljutisele jaotisele.
+
+Näide
+------
+Kui tänane kuupäev on 14. oktoober 2026:
+- 14. oktoobri ja tulevased kirjed on tavavaates.
+- 7.–13. oktoobri kirjed on „Hiljuti möödunud” jaotises.
+- 6. oktoobri ja vanemad kirjed ei ole rakenduses nähtavad.
+- Kui tänase sündmuse kellaaeg on juba möödunud, liigub see samuti „Hiljuti
+  möödunud” jaotisse; tänase päeva teated jäävad tänase päeva aktiivseks infoks.
+- Säilitamise piir arvutatakse kalendripäevade järgi, seega kogu 7. oktoober
+  jääb 14. oktoobril veel alles ka siis, kui kellaaeg on varasem.
+
+ETAPP 2.2 TÖÖLOGI
+Kuupäev: 15. oktoober 2026
+
+Parandus
+--------
+- Kultuurikava sündmuse kestust arvestatakse nüüd sündmuse algus- ja lõppaja
+  järgi.
+- Kestev sündmus, nagu „Liigu, leia, lahenda”, jääb aktiivsete sündmuste
+  hulka kuni tegeliku lõppajani.
+- Üritust ei liigitata enam möödunuks ainult alguskuupäeva põhjal.
+- „Hiljuti möödunud” asendati loomulikumate nimetustega „Hiljutised teated”
+  ja „Hiljutised sündmused”.
+
+ETAPP 2.3 TÖÖLOGI
+Kuupäev: 15. oktoober 2026
+
+Kasutusmugavuse parandused
+--------------------------
+- Ülemine ebamäärane seadete ikoon asendati hammasratta ikooniga.
+- Hammasrattal on nüüd täpsem ligipääsetavuse tekst „Ava seaded”.
+- Seadete vaatesse lisati „Tume kujundus” lüliti.
+- Tume kujundus muudab rakenduse tausta, kaardid, tekstid, piirjooned ja
+  alumise navigatsiooni tumedale teemale sobivaks.
+- Tumeda kujunduse valik salvestatakse seadmesse ja taastatakse rakenduse
+  järgmisel avamisel.
+
+ETAPP 2.4 TÖÖLOGI
+Kuupäev: 15. oktoober 2026
+
+Tumeda kujunduse kontrasti parandus
+-----------------------------------
+- Muutsin tumeda teavituste kaardi pealkirja ja kirjeldus-teksti heledamaks.
+- Tegin jaotise „Hiljutised teated” pealkirja ja selgituse tumedas režiimis
+  selgelt loetavaks.
+- Muutsin hiljutiste kirjete tausta tumedas režiimis heledamaks kui põhi-taust,
+  et kaardid eristuksid.
+- Suurendasin hiljutiste kaartide piirjoonte kontrasti.
+- Tugevdasin teema pealkirjade, kaartide pealkirjade ja kuupäevade kontrasti.
+
+ETAPP 2.5 TÖÖLOGI
+Kuupäev: 15. oktoober 2026
+
+Avalehte parandav muudatus
+--------------------------
+- „Värskeimad teated” ja „Järgmised sündmused” kuvatakse nüüd kohe pärast
+  andmepäringute edukat lõppu, ilma täiendava kunstliku viivituseta.
+- Tugevdasin teadete kuupäeva teisendust, et vigane kuupäev ei põhjustaks kogu
+  avalehe värskete teadete kadumist.
+- Teated sorteeritakse kuupäeva järgi uuemad ees.
+- Kui värskeid teateid päriselt ei ole, näitab rakendus nüüd selget teksti
+  „Uusi teateid pole.” varasema „Uusi teave puudub.” asemel.
+- Kontrollisin juurkausta "index.html" värskendamist ning päris teadete
+  kuvamist avalehel.
+
+ETAPP 2.6 TÖÖLOGI
+Kuupäev: 15. oktoober 2026
+
+Käivitusprobleemi parandus
+--------------------------
+- Selgitasin, et otse failina avatud "file://.../index.html" võib brauser
+  blokeerida pärisandmete päringud välistele veebilehtedele.
+- Lisasin failile "Käivita rakendus.bat", mis käivitab projekti kohalikus
+  veebiserveris ja avab rakenduse õigel aadressil.
+- Lisatud on andmepäringute 15-sekundiline ajalõpp.
+- Otse failina avamisel näidatakse nüüd arusaadavat juhist, mitte segadust
+  tekitavat tühja vaadet.
+- Ajalõpu või muu ühenduse vea korral kuvatakse kasutajale selge veateade.
+
+Kasutamine Windowsis
+--------------------
+1. Ava projektikaust.
+2. Tee topeltklõps failil "Käivita rakendus.bat".
+3. Rakendus avaneb aadressil http://localhost:8080/index.html.
+4. Serveri sulgemiseks sulge avanenud käsureaaken.
+
+Märkus: selle arvuti kontroll näitas, et Python puudub, seetõttu kasutab
+käivitusfail nüüd Node.js-i. Node.js on selles arvutis olemas.
+
+ETAPP 2.7 TÖÖLOGI
+Kuupäev: 15. oktoober 2026
+
+Vapi pildi parandamine
+----------------------
+- Vapi pilt viitas enne projektikaustast väljapoole jäävale kaustale
+  "../Homepage".
+- Kohalik veebiserver ei saanud seda välist faili kätte ja seepärast kuvati
+  brauseris katkist pilti.
+- Kopeerisin vapi faili rakenduse enda kausta.
+- Muutsin "index.html" viite rakenduse-siseseks: "Mulgi_valla_vapp.svg.webp".
+- Vapp töötab nüüd nii tavalisel veebiserveril kui ka rakenduse edasisel
+  mobiilirakenduseks pakkimisel.
+
+ETAPP 2.8 TÖÖLOGI
+Kuupäev: 16. oktoober 2026
+
+Meeldetuletuse visuaalne demo
+-----------------------------
+- Sündmuse detailvaate nupule „Lisa meeldetuletus” lisati töötav demoefekt.
+- Nupule vajutades ilmub ekraani alumisse ossa kinnituse hüpikaken.
+- Hüpikaknas kuvatakse sündmuse nimi ja teade, et meeldetuletus on lisatud.
+- Kolme sekundi pärast muutub hüpikaken saabunud meeldetuletuse visuaaliks:
+  „Demo: meeldetuletus” ja „Sündmus algab peagi.”
+- Hüpikakna saab sulgeda nupust.
+- Tegemist on esitlusdemoga; see ei kasuta veel telefoni operatsioonisüsteemi
+  päris-teavitust.
