@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="et">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#17335d">
+  <title>Mulgi vald — teated</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <a class="brand" href="#home" aria-label="Avaleht">
+        <img src="Mulgi_valla_vapp.svg.webp" alt="Mulgi valla vapp">
+        <span><strong>Mulgi vald</strong><small>Teated ja sündmused</small></span>
+      </a>
+      <button class="icon-button" id="notificationButton" aria-label="Ava seaded">⚙</button>
+    </header>
+
+    <main>
+      <section class="screen is-active" data-screen="home">
+        <div class="welcome">
+          <p class="eyebrow">Tere tulemast</p>
+          <h1>Oluline info,<br><em>õigel ajal.</em></h1>
+          <p class="intro">Valla olulised teadaanded ja sündmused ühes kohas.</p>
+        </div>
+
+        <div class="notice-card">
+          <div class="notice-icon">!</div>
+          <div>
+            <span class="card-label">Teavitused</span>
+            <h2>Ära maga olulist maha</h2>
+            <p>Luba märguanded, et saada teave tähtsate teadaannete ja uute sündmuste kohta.</p>
+          </div>
+          <button class="primary-button" id="enableNotifications">Luba märguanded</button>
+        </div>
+
+        <div class="section-heading">
+          <h2>Värskeimad teated</h2>
+          <a href="#notices">Vaata kõiki</a>
+        </div>
+        <div class="feed" id="homeFeed"></div>
+
+        <div class="section-heading">
+          <h2>Järgmised sündmused</h2>
+          <a href="#events">Kalender</a>
+        </div>
+        <div class="event-strip" id="homeEvents"></div>
+      </section>
+
+      <section class="screen" data-screen="notices">
+        <div class="screen-heading">
+          <div><p class="eyebrow">Hoia end kursis</p><h1>Teadaanded</h1></div>
+        </div>
+        <div class="filter-row">
+          <button class="filter is-selected" data-filter="all">Kõik</button>
+          <button class="filter" data-filter="important">Oluline</button>
+          <button class="filter" data-filter="general">Üldine</button>
+        </div>
+        <div class="feed feed-large" id="noticeFeed"></div>
+        <div class="archive-heading">
+          <h2>Hiljutised teated</h2>
+          <p>Viimase 7 päeva teated</p>
+        </div>
+        <div class="feed feed-large recent-feed" id="recentNoticeFeed"></div>
+      </section>
+
+      <section class="screen" data-screen="events">
+        <div class="screen-heading">
+          <div><p class="eyebrow">Pane kalendrisse</p><h1>Sündmused</h1></div>
+        </div>
+        <div class="event-list" id="eventList"></div>
+        <div class="archive-heading">
+          <h2>Hiljutised sündmused</h2>
+          <p>Viimase 7 päeva sündmused</p>
+        </div>
+        <div class="event-list recent-feed" id="recentEventList"></div>
+      </section>
+
+      <section class="screen" data-screen="detail">
+        <button class="back-button" id="detailBack">← Tagasi</button>
+        <div id="detailContent"></div>
+      </section>
+
+      <section class="screen" data-screen="settings">
+        <div class="screen-heading">
+          <div><p class="eyebrow">Isiklikud valikud</p><h1>Seaded</h1></div>
+        </div>
+        <div class="settings-card">
+          <div class="setting-row"><div><strong>Olulised teadaanded</strong><small>Teavita mind kiireloomulisest infost</small></div><button class="toggle is-on" aria-label="Olulised teadaanded"></button></div>
+          <div class="setting-row"><div><strong>Uued sündmused</strong><small>Anna teada uutest valla sündmustest</small></div><button class="toggle is-on" aria-label="Uued sündmused"></button></div>
+          <div class="setting-row"><div><strong>Sündmuste meeldetuletused</strong><small>Meeldetuletus enne valitud sündmust</small></div><button class="toggle" aria-label="Sündmuste meeldetuletused"></button></div>
+          <div class="setting-row"><div><strong>Tume kujundus</strong><small>Kasuta rakendust tumedates toonides</small></div><button class="toggle" id="darkModeToggle" aria-label="Tume kujundus"></button></div>
+        </div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Põhinavigatsioon">
+      <a href="#home" data-nav="home"><span>⌂</span>Avaleht</a>
+      <a href="#notices" data-nav="notices"><span>!</span>Teated</a>
+      <a href="#events" data-nav="events"><span>◷</span>Sündmused</a>
+      <a href="#settings" data-nav="settings"><span>☼</span>Seaded</a>
+    </nav>
+  </div>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
