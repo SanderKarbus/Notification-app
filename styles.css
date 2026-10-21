@@ -37,6 +37,7 @@ h1 em { color: var(--blue); font-style: normal; }
 .intro { max-width: 280px; color: var(--muted); font-size: 14px; line-height: 1.5; }
 
 .notice-card { display: grid; grid-template-columns: auto 1fr; gap: 13px; margin: 28px 0 34px; padding: 18px; border-radius: 20px; color: var(--white); background: var(--navy); box-shadow: var(--shadow); }
+.notice-card[hidden] { display: none; }
 .notice-icon { display: grid; width: 33px; height: 33px; place-items: center; border-radius: 50%; color: var(--navy); background: var(--gold); font-weight: 800; }
 .notice-card h2 { margin: 4px 0 6px; font-size: 17px; letter-spacing: -.03em; }
 .notice-card p { margin: 0; color: #c4d0e2; font-size: 11px; line-height: 1.45; }

@@ -2,6 +2,7 @@ const detailContent = document.querySelector("#detailContent");
 let notices = [];
 let events = [];
 const RECENT_DAYS = 7;
+const notificationsStorageKey = "mulgi-app-notifications-enabled";
 
 const startOfToday = () => {
   const today = new Date();
@@ -170,9 +171,11 @@ function showScreen() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
-document.querySelectorAll(".toggle").forEach((toggle) => toggle.addEventListener("click", () => toggle.classList.toggle("is-on")));
+document.querySelectorAll(".toggle:not(#notificationsToggle)").forEach((toggle) => toggle.addEventListener("click", () => toggle.classList.toggle("is-on")));
 const darkModeToggle = document.querySelector("#darkModeToggle");
 const darkModeStorageKey = "mulgi-app-dark-mode";
+const notificationsToggle = document.querySelector("#notificationsToggle");
+const notificationCard = document.querySelector("#notificationCard");
 
 const setDarkMode = (enabled) => {
   document.body.classList.toggle("dark-mode", enabled);
@@ -186,9 +189,20 @@ darkModeToggle.addEventListener("click", () => {
   setDarkMode(enabled);
   localStorage.setItem(darkModeStorageKey, String(enabled));
 });
-document.querySelector("#enableNotifications").addEventListener("click", (event) => {
-  event.currentTarget.textContent = "Märguanded lubatud";
-  event.currentTarget.classList.add("is-enabled");
+
+const setNotificationsEnabled = (enabled) => {
+  notificationsToggle.classList.toggle("is-on", enabled);
+  notificationsToggle.setAttribute("aria-pressed", String(enabled));
+  notificationCard.hidden = enabled;
+  localStorage.setItem(notificationsStorageKey, String(enabled));
+};
+
+setNotificationsEnabled(localStorage.getItem(notificationsStorageKey) === "true");
+document.querySelector("#enableNotifications").addEventListener("click", () => {
+  setNotificationsEnabled(true);
+});
+notificationsToggle.addEventListener("click", () => {
+  setNotificationsEnabled(!notificationsToggle.classList.contains("is-on"));
 });
 document.querySelector("#notificationButton").addEventListener("click", () => { window.location.hash = "settings"; });
 document.querySelector("#detailBack").addEventListener("click", () => { window.location.hash = "home"; });

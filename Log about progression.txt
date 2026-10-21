@@ -306,3 +306,16 @@ Sündmuste kategooriate filtreerimine
   selgema nimetusega „Meelelahutus”.
 - Filtreerimine rakendub nii tulevastele kui ka hiljutistele sündmustele.
 - Kui valitud kategoorias sündmusi ei ole, kuvatakse selle kohta eraldi teade.
+
+ETAPP 3.5 TÖÖLOGI
+Kuupäev: 21. oktoober 2026
+
+Märguannete kasutusvoo täpsustus
+--------------------------------
+- Avalehe märguannete kaart kuvatakse ainult seni, kuni kasutaja pole
+  märguandeid lubanud.
+- Pärast nupule „Luba märguanded” vajutamist eemaldatakse kaart avalehelt.
+- Märguannete valik lisati seadete vaatesse eraldi lülitina.
+- Kasutaja valik salvestatakse seadmesse ning taastatakse rakenduse järgmisel
+  avamisel.
+- Seadete kaudu saab märguanded hiljem uuesti sisse või välja lülitada.
