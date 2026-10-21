@@ -88,6 +88,14 @@ const renderNoticeFilter = (filter) => {
   bindDetailLinks();
 };
 
+const renderEventFilter = (filter) => {
+  const filtered = events.filter((event) => filter === "all" || event.category === filter);
+  const groups = splitByAge(filtered, true);
+  renderCollection(document.querySelector("#eventList"), groups.active, (event) => eventMarkup(event, true), "Selles kategoorias pole tulevasi sündmusi.");
+  renderCollection(document.querySelector("#recentEventList"), groups.recent, (event) => eventMarkup(event, true), "Selles kategoorias pole viimase 7 päeva möödunud sündmusi.");
+  bindDetailLinks();
+};
+
 const renderDetail = (type, id) => {
   const item = (type === "notice" ? notices : events).find((entry) => entry.id === id);
   if (!item) {
@@ -187,6 +195,10 @@ document.querySelector("#detailBack").addEventListener("click", () => { window.l
 document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => {
   document.querySelectorAll("[data-filter]").forEach((item) => item.classList.toggle("is-selected", item === button));
   renderNoticeFilter(button.dataset.filter);
+}));
+document.querySelectorAll("[data-event-filter]").forEach((button) => button.addEventListener("click", () => {
+  document.querySelectorAll("[data-event-filter]").forEach((item) => item.classList.toggle("is-selected", item === button));
+  renderEventFilter(button.dataset.eventFilter);
 }));
 
 const startApp = async () => {

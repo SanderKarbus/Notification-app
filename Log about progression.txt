@@ -292,3 +292,17 @@ PWA aluse loomine
 - Lisatud manifest ja service worker registreeritakse ainult veebiaadressil;
   otse "file://" avamisel neid ei registreerita.
 - Kohalik server oskab nüüd manifesti JSON-faili õige sisutüübiga serveerida.
+
+ETAPP 3.4 TÖÖLOGI
+Kuupäev: 21. oktoober 2026
+
+Sündmuste kategooriate filtreerimine
+------------------------------------
+- Demo tagasiside põhjal lisasin sündmuste vaatesse kategooriafiltrid.
+- Kasutaja saab valida kõigi sündmuste või kategooria „Sport”, „Kino”,
+  „Meelelahutus”, „Pere ja lapsed”, „Kirjandus”, „Teater”, „Varia” või
+  „Mess ja laat” vahel.
+- Kultuurikava allika kategooria „Pidu ja Klubi” kuvatakse rakenduses
+  selgema nimetusega „Meelelahutus”.
+- Filtreerimine rakendub nii tulevastele kui ka hiljutistele sündmustele.
+- Kui valitud kategoorias sündmusi ei ole, kuvatakse selle kohta eraldi teade.

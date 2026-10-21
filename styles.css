@@ -65,6 +65,8 @@ h1 em { color: var(--blue); font-style: normal; }
 
 .screen-heading { margin-bottom: 28px; }
 .filter-row { display: flex; gap: 8px; margin-bottom: 18px; }
+.event-filter-row { overflow-x: auto; padding-bottom: 4px; scrollbar-width: thin; }
+.event-filter-row .filter { flex: 0 0 auto; }
 .filter { padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: transparent; font-size: 11px; }
 .filter.is-selected { color: var(--white); background: var(--navy); border-color: var(--navy); }
 .feed-large .feed-item { padding: 18px; }

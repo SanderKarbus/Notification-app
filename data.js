@@ -3,6 +3,17 @@ const MULGI_SOURCES = {
   events: "https://www.kultuurikava.ee/widget/af68b005502ca6d738249657707037b20f46dfe0/?do=data&start=0&nocache=1&limit=50&ignoremuuseums=true"
 };
 
+const EVENT_CATEGORIES = [
+  "Sport",
+  "Kino",
+  "Meelelahutus",
+  "Pere ja lapsed",
+  "Kirjandus",
+  "Teater",
+  "Varia",
+  "Mess ja laat"
+];
+
 const decodeHtml = (value) => {
   const element = document.createElement("textarea");
   element.innerHTML = value || "";
@@ -52,6 +63,8 @@ const mapNotice = (post) => ({
 const mapEvent = (event) => {
   const date = formatEventDate(event.time.start);
   const endTimestamp = event.time.end || event.time.start;
+  const sourceCategory = event.categories?.find((category) => category.name_nat)?.name_nat;
+  const category = sourceCategory === "Pidu ja Klubi" ? "Meelelahutus" : sourceCategory;
   return {
     id: `event-${event.id}`,
     day: date.day,
@@ -60,6 +73,7 @@ const mapEvent = (event) => {
     place: event.time.place.name,
     time: formatEventTime(event.time.start),
     description: `${event.name} toimub kohas ${event.time.place.name}.`,
+    category: EVENT_CATEGORIES.includes(category) ? category : "Varia",
     sourceUrl: `https://www.kultuurikava.ee${event.internalurl}`,
     date: date.iso,
     endDateIso: new Date(endTimestamp * 1000).toISOString(),
