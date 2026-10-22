@@ -3,200 +3,175 @@ PROJEKTI ARENGULOGI
 
 Projekt: Mulgi valla teate- ja sündmuserakendus
 
-**Fookus:** Mulgi valla olulise info koondamine mobiilis kasutatavasse
-rakendusse. Esimese funktsionaalse prototüübi loomine, andmeallikate
-kaardistamine, kasutajaliidese arendus ja rakenduse ettevalmistamine
-hilisemaks mobiilirakenduseks pakendamiseks.
+**Fookus:** Mulgi valla oluliste teadete ja sündmuste koondamine eraldi
+mobiilirakendusse. Esimese prototüübi kasutajaliides, andmeallikad,
+funktsionaalne loogika ja hilisem mobiilirakenduseks pakendamine.
 
 ---
 
-**13.10: Rakenduse eesmärgi ja funktsionaalse ulatuse määratlemine**
+**13.10: Rakenduse eesmärgi ja sisu piiride määramine**
 
-- **Põhieesmärgi sõnastamine:** Määratleti rakenduse põhifookus – koondada
-  ühte kohta Mulgi valla olulised teated ja sündmused.
-- **Sisu ulatuse piiramine:** Otsustati jätta rakendusest välja kogu valla
-  veebilehe üldine sisu, galeriid ja muu info, mis ei ole kasutajale
-  sündmuse või teadaandena vajalik.
-- **MVP funktsioonide määratlemine:** Pandi paika avaleht, teadete vaade,
-  sündmuste vaade, detailvaated, seadete vaade ja sündmusele meeldetuletuse
-  lisamise kasutusvoog.
-- **Mobiilse kasutuse lähtekoht:** Rakenduse ülesehitus planeeriti esmalt
-  väikese ekraani ja puutejuhtimise järgi, mitte tavapärase veebilehe
-  laiendusena.
+- Rakenduse põhiidee: Mulgi valla olulised teated ja sündmused ühes
+  mobiilis kasutatavas vaates.
+- Rakenduse sisu: teated, sündmused, detailvaated, seadete vaade ja
+  sündmusele meeldetuletuse lisamise võimalus.
+- Rakendusest välja jääv sisu: üldine uudisvoog, galeriid ja muu valla
+  veebilehe materjal, mis ei ole kasutajale otseselt teate või sündmusena
+  vajalik.
+- Esimese versiooni eesmärk: lihtne ja kiiresti loetav rakendus, mitte kogu
+  valla veebilehe koopia.
 
-**14.10: Infoarhitektuur ja kasutusvoo planeerimine**
+**14.10: Rakenduse vaadete ja kasutusvoo ülesehitus**
 
-- **Põhivaadete struktuur:** Planeeriti avaleht, teadete loend, sündmuste
-  loend, teate detailvaade, sündmuse detailvaade ja seadete vaade.
-- **Avalehe ülesehitus:** Avalehele kavandati värskeimate teadete ja
-  järgmiste sündmuste lühivaade, et kasutaja jõuaks olulise infoni ilma
-  eraldi loendisse liikumata.
-- **Detailvaadete loogika:** Teate või sündmuse kaardilt peab saama ühe
-  tegevusega liikuda detailvaatesse ja sealt algallikale.
-- **Põhinavigatsioon:** Planeeriti alumine mobiilinavigatsioon avalehe,
-  teadete, sündmuste ja seadete vahel liikumiseks.
-- **Seadete ulatus:** Esimeses versioonis kavandati kujunduse, märguannete
-  ja hiljem lisanduvate meeldetuletuste seadistamine ilma kasutajakontota.
+- Avaleht: värskeimad teated ja lähenevad sündmused kohe esimeses vaates.
+- Teadete vaade: teadete loend, filtreerimine ja teate detailvaade.
+- Sündmuste vaade: sündmuste loend ja sündmuse detailvaade.
+- Detailvaade: kogu teate või sündmuse oluline info ning algallika link.
+- Seadete vaade: kujundus, märguanded ja hiljem lisanduvad meeldetuletuste
+  seaded.
+- Põhimenüü: alumine navigatsioon avalehe, teadete, sündmuste ja seadete
+  vahel liikumiseks.
+- Sündmuse kasutusvoog: sündmuse leidmine → detailvaade → meeldetuletuse
+  lisamine.
 
-**15.10: Kasutajaliidese visuaalse suuna loomine**
+**15.10: Kasutajaliidese visuaalne ülesehitus**
 
-- **Visuaalne põhisuund:** Määrati rakenduse värvipalett, teksti
-  hierarhia, kaardipõhine sisu esitus ja mobiilile sobiv paigutus.
-- **Päis ja navigatsioon:** Kavandati rakenduse nimi, Mulgi valla vapi
-  kasutus, seadete ikoon ja alumine navigatsioon.
-- **Teate- ja sündmuskaardid:** Määratleti kaardil kuvatav minimaalne info:
-  teate puhul pealkiri, kuupäev ja lühitekst; sündmuse puhul kuupäev,
-  kellaaeg, asukoht ja nimetus.
-- **Kujunduse olekud:** Planeeriti laadimise, tühja tulemuse ja
-  ühendusvea kuvamine, et kasutaja ei jääks andmete puudumise korral
-  tühja lehe ette.
-- **Tume kujundus:** Kavandati hele ja tume kujundus koos kasutaja valiku
-  salvestamisega.
+- Rakenduse päis: Mulgi valla vapp, rakenduse nimi ja seadete ikoon.
+- Teatekaart: pealkiri, kuupäev ja lühikirjeldus.
+- Sündmuskaart: kuupäev, sündmuse nimi, kellaaeg ja asukoht.
+- Detailvaade: suurem pealkiri, sisu, kuupäev, asukoht ja algallika link.
+- Mobiilivaade: kaartide, nuppude ja navigatsiooni paigutus väikese
+  ekraani järgi.
+- Kujunduse olekud: laadimine, tühi sisu ja ühenduse viga.
+- Tume kujundus: eraldi värvid taustale, kaartidele, tekstidele ja
+  navigatsioonile koos kasutaja valiku salvestamisega.
 
-**16.–17.10: Esimese funktsionaalse kasutajaliidese prototüübi arendus**
+**16.–17.10: Esimese funktsionaalse prototüübi koodibaas**
 
-- **Baaskoodi loomine:** Rakenduse põhistruktuur ehitati HTML-i, CSS-i ja
-  JavaScripti peale, et säilitada lihtne ja hiljem mobiilirakenduseks
-  pakendatav koodibaas.
-- **Vaadete realiseerimine:** Loodi avalehe, teadete, sündmuste, detailvaate
-  ja seadete vaadete esmane kood.
-- **Navigatsioon:** Rakenduse vaadete vaheline liikumine lahendati URL-i
-  hash-põhise navigatsiooniga.
-- **Andmekihi eraldamine:** Näidisandmed ja andmete kuvamise loogika viidi
-  eraldi andmekihti, et kasutajaliidest oleks võimalik hiljem väliste
-  allikatega ühendada.
-- **Detailvaated:** Teadete ja sündmuste kaartidele lisati detailvaatesse
-  liikumine ning detailvaatest tagasiliikumine.
-- **Olekuvaated:** Lisati laadimise, tühja tulemuse ja veaolekute esmane
-  struktuur.
+- Projekti põhifailid: `index.html`, `styles.css`, `app.js` ja `data.js`.
+- Põhivaated: avaleht, teated, sündmused, detailvaade ja seaded.
+- Hash-põhine navigatsioon: vaadete vahetamine ilma eraldi lehtede
+  laadimiseta.
+- Andmekihi eraldamine: näidisandmed ja andmete töötlemine kasutajaliidese
+  koodist eraldi.
+- Teate ja sündmuse kaartidelt detailvaatesse liikumine.
+- Laadimise, tühja tulemuse ja veaoleku esmane kasutajaliides.
+- Meeldetuletuse nupu koht sündmuse detailvaates.
 
-**14.–15.10: Mulgi valla andmeallikate uurimine**
+**14.–15.10: Mulgi valla andmeallikate kaardistamine**
 
-- **Olemasolevate allikate võrdlus:** Uuriti Mulgi valla veebilehe
-  uudistevoogu ja sündmuste kuvamise lahendust.
-- **Teadete allika valik:** Üldise uudisvoo asemel valiti WordPressi API
-  kategooria „Uudised ja teated”, et rakendusse ei jõuaks galeriid ega muu
-  rakenduse fookusest välja jääv sisu.
-- **Sündmuste allika valik:** Sündmuste jaoks kaardistati Kultuurikava
-  andmeallikas, mida kasutab ka Mulgi valla veebileht.
-- **Andmemudeli ettevalmistus:** Määratleti rakenduse jaoks vajalikud väljad:
-  tunnus, pealkiri, kuupäev, kellaaeg, asukoht, kirjeldus, algallika link
-  ja sündmuse lõppaeg.
-- **API-vastuste kontroll:** Kontrolliti, millisel kujul välised allikad
-  andmeid tagastavad ja millised väljad tuleb rakenduse vormingusse
-  teisendada.
+- Teadete allikate võrdlus: üldine uudisvoog sisaldab liiga palju
+  rakenduse fookusest välja jäävat sisu.
+- WordPressi API kategooria „Uudised ja teated”: sobiv allikas ainult
+  teadete jaoks vajaliku sisu toomiseks.
+- Kultuurikava kalender: sündmuste allikas, mida kasutab ka Mulgi valla
+  veebileht.
+- Vajalikud andmeväljad: tunnus, pealkiri, kuupäev, kellaaeg, asukoht,
+  kirjeldus, lõppaeg ja algallika link.
+- Väliste API-vastuste teisendamine rakenduse enda andmevormingusse.
 
-**15.10: Pärisandmete ühendamine ja teisendamine**
+**15.10: Päris teadete ja sündmuste ühendamine**
 
-- **WordPressi ühendus:** Rakendus ühendati Mulgi valla WordPressi REST API
-  „Uudised ja teated” kategooriaga.
-- **Kultuurikava ühendus:** Rakendus ühendati Mulgi valla sündmuste
-  Kultuurikava andmeallikaga.
-- **Andmete teisendus:** Väliste API-de vastused teisendatakse rakenduse
-  enda ühtseks andmevorminguks enne kasutajaliideses kuvamist.
-- **Teate detailinfo:** Teate detailvaatesse lisati pikem sisu ja võimalus
-  liikuda algsele veebilehele.
-- **Sündmuse detailinfo:** Sündmuse vaatesse lisati nimi, kuupäev, kellaaeg,
-  koht ja link algsele sündmusele.
-- **Veakäsitlus:** Kui andmeallikas ei vasta või tagastab vale kujuga
-  vastuse, kuvatakse kasutajale veateade ning rakendus ei lähe vaikimisi
-  näidisandmetele üle.
+- Mulgi valla WordPressi REST API kategooria „Uudised ja teated”.
+- Kultuurikava sündmuste andmeallikas koos kuupäeva, kellaaja ja asukohaga.
+- Teadete detailinfo: pikem sisu ja link algsele veebiteatele.
+- Sündmuste detailinfo: sündmuse nimi, toimumiskoht, kellaaeg ja link
+  algsele sündmusele.
+- Kuupäevade ja kellaaegade teisendus Eesti lokaadi järgi.
+- Andmepäringu viga: kasutajale selge veateade, mitte vaikne üleminek
+  vanadele näidisandmetele.
 
-**15.10: Kuupäevapõhine sisu- ja arhiiviloogika**
+**15.10: Teadete ja sündmuste ajapõhine kuvamine**
 
-- **Aktiivse sisu eraldamine:** Tulevased ja aktiivsed teated ning sündmused
-  kuvatakse tavavaates.
-- **Hiljutise sisu eraldamine:** Viimase seitsme päeva möödunud kirjed
-  kuvatakse eraldi jaotises „Hiljutised teated” ja „Hiljutised sündmused”.
-- **Vana sisu eemaldamine:** Vanemad kirjed jäetakse rakenduse vaates välja.
-- **Kestvate sündmuste kontroll:** Möödunud oleku arvutamisel võetakse
-  arvesse sündmuse lõppaega, mitte ainult algusaega. See lahendab näiteks
-  „Liigu, leia, lahenda” tüüpi kestva sündmuse kuvamise.
-- **Teadete filtrid:** Teadete vaatesse lisati filtrid „Kõik”, „Oluline” ja
-  „Üldine”.
+- Aktiivsed ja tulevased kirjed tavavaates.
+- Viimase seitsme päeva möödunud kirjed eraldi jaotistes „Hiljutised
+  teated” ja „Hiljutised sündmused”.
+- Vanemad kirjed rakenduse vaatest välja.
+- Teadete filtrid: „Kõik”, „Oluline” ja „Üldine”.
+- Kestva sündmuse lõppaeg aktiivsuse arvutamisel, mitte ainult algusaeg.
+- „Liigu, leia, lahenda” tüüpi sündmuse püsimine aktiivsete sündmuste
+  hulgas kuni tegeliku lõppajani.
 
-**15.10: Kujunduse, käivitamise ja lokaalse keskkonna parandused**
+**15.10: Kasutusmugavus, lokaalne käivitamine ja kujunduse parandused**
 
-- **Tumeda kujunduse realiseerimine:** Seadete vaatesse lisati tumeda
-  kujunduse lüliti ning valik salvestatakse seadmesse.
-- **Kontrasti parandamine:** Kontrolliti tumeda kujunduse loetavust ja
-  parandati teavituste kaardi, hiljutiste kirjete, abitekstide ja
-  piirjoonte kontrasti.
-- **Lokaalse käivitamise probleem:** Selgus, et otse `file://` kaudu avatud
-  HTML-faili puhul võivad brauserid välised API-päringud blokeerida.
-- **Käivituse lahendus:** Loodi Node.js-i põhine lokaalne server ja Windowsi
-  käivitusfail „Käivita rakendus.bat”.
-- **Ajalõpp:** Andmepäringutele lisati 15-sekundiline ajalõpp ning kasutajale
-  arusaadav selgitus ühenduse või ajalõpu korral.
-- **Logo parandamine:** Väljastpoolt projektikausta viidatud vapi pilt viidi
-  projekti enda kausta ja ühendati rakendusesisese viitega.
+- Ülemise seadete ikooni asendus hammasrattaga ja selgem
+  ligipääsetavuse nimetus.
+- Tumeda kujunduse kontrasti parandused teavituste kaardil, hiljutiste
+  kirjete jaotises, abitekstides ning piirjoontes.
+- `file://` kaudu avamise probleem: väliste API-päringute ebastabiilne
+  toimimine otse HTML-failist.
+- Node.js-i põhine lokaalne server ja Windowsi käivitusfail
+  „Käivita rakendus.bat”.
+- Andmepäringute 15-sekundiline ajalõpp ja eraldi kasutajale mõeldud
+  veateade.
+- Mulgi valla vapi viide projekti enda kausta, et vältida katkist pilti
+  lokaalses serveris ja hilisemas mobiilipaketis.
 
-**16.10: Meeldetuletuse kasutusvoo esmane demo**
+**16.10: Meeldetuletuse kasutajaliidese demo**
 
-- **Detailvaate tegevusnupp:** Sündmuse detailvaatesse lisati nupp „Lisa
-  meeldetuletus”.
-- **Esitlusdemo:** Nupule vajutamisel kuvatakse visuaalne kinnitushüpik,
-  mis muutub mõne sekundi pärast saabunud teavituse näidiseks.
-- **Piirang:** Tegemist on ainult kasutajaliidese demoga. See ei salvesta
-  veel päris meeldetuletust ega kasuta telefoni operatsioonisüsteemi
-  teavitusi.
-- **Edasine lahendus:** Päris meeldetuletused planeeritakse hilisemasse
-  Androidi/iOS-i rakenduse etappi.
+- Sündmuse detailvaate nupp „Lisa meeldetuletus”.
+- Kinnitushüpik sündmuse nime ja meeldetuletuse tekstiga.
+- Kolme sekundi järel muutuv saabunud meeldetuletuse näidis.
+- Hüpikakna sulgemise võimalus.
+- Tegemist on esitluse jaoks loodud visuaalse demoga, mitte telefoni päris
+  meeldetuletuse ega push-teavitusega.
 
-**19.10: PWA tehnilise aluse loomine**
+**19.10: PWA aluse loomine**
 
-- **Manifest:** Loodi rakenduse manifest nime, värvide, avavaate ja ikoonide
-  määramiseks.
-- **Service worker:** Lisati service worker rakenduse staatiliste
-  põhifailide vahemällu salvestamiseks.
-- **Välised API-d:** Mulgi valla ja Kultuurikava dünaamilisi vastuseid ei
-  salvestata püsivalt vahemällu, et vältida aegunud sündmuste ja teadete
-  kuvamist.
-- **Ikoonid:** Loodi rakenduse 192 px ja 512 px ikoonid hilisemaks
-  avakuvale paigaldamiseks.
-- **Kontroll:** PWA põhja kontrolliti lokaalse Node.js-i serveri kaudu.
-  Otse `file://` avamisel service worker'it ei registreerita.
+- Rakenduse manifest: nimi, värvid, avavaade ja ikoonid.
+- Service worker staatiliste põhifailide vahemällu salvestamiseks.
+- Dünaamiliste Mulgi valla ja Kultuurikava API-vastuste jätmine otse võrku.
+- 192 px ja 512 px rakenduse ikoonid.
+- Service worker'i registreerimine ainult HTTP/HTTPS keskkonnas, mitte
+  `file://` kaudu.
 
-**19.–21.10: Demo avaldamine ja kasutajatagasiside**
+**19.–21.10: Demo avaldamine ja tagasiside**
 
-- **Avalik demo:** Rakendus avaldati GitHub Pagesi kaudu isiklikul domeenil
-  `sanderkarbus.me`, et lahendust oleks võimalik näidata väljaspool
-  kohalikku arenduskeskkonda.
-- **Demo kontroll:** Avalikus keskkonnas töötasid rakenduse põhivaated,
-  sündmuste kuvamine ja navigeerimine. Teadete laadimise probleem jäi
-  eraldi tehniliseks ülesandeks.
-- **Tagasiside:** Demo esitlemise järel tuli ettepanek lisada sündmustele
-  kategooriapõhine filtreerimine.
-- **Kategooriad:** Sündmuste vaatesse planeeriti kategooriad „Sport”,
-  „Kino”, „Meelelahutus”, „Pere ja lapsed”, „Kirjandus”, „Teater”,
-  „Varia” ning „Mess ja laat”.
-- **Nimetuse täpsustus:** Kultuurikava kategooria „Pidu ja Klubi” kuvatakse
-  rakenduses selgema nimetusega „Meelelahutus”.
-- **Märguannete kasutusvoog:** Avalehe märguannete kaart muudeti
-  ühekordseks lubamise kutseks. Pärast valiku tegemist kaart kaob ning
-  seadete vaates saab valikut hiljem muuta.
-- **Tehniline piirang:** Märguannete praegune lahendus on kasutajaliidese
-  prototüüp ja lokaalselt salvestatud valik. Päris telefoni push-teavitused
-  lisatakse hiljem mobiilirakenduse faasis.
+- GitHub Pagesi töövoo seadistamine ja private-repositooriumi Pagesi
+  piirangutega tegelemine.
+- Isikliku domeeni `sanderkarbus.me` ühendamine GitHub Pagesiga.
+- Avalik demo vallavanemale: põhivaated, sündmuste kuvamine ja
+  navigatsioon toimisid; teadete laadimine vajab eraldi parandust.
+- Tagasiside sündmuste vaate kohta: kõikide sündmuste kõrval peab saama
+  valida ka kategooria.
+
+**21.10: Sündmuste kategooriafiltrite lisamine**
+
+- Sündmuste filtrid: „Kõik”, „Sport”, „Kino”, „Meelelahutus”, „Pere ja
+  lapsed”, „Kirjandus”, „Teater”, „Varia” ning „Mess ja laat”.
+- Kultuurikava kategooria „Pidu ja Klubi” kuvamine rakenduses nimega
+  „Meelelahutus”.
+- Kategooria lisamine sündmuse andmemudelisse.
+- Filtreerimine aktiivsete ja hiljutiste sündmuste vahel.
+- Tühja kategooria eraldi teade.
+- Mobiilivaates horisontaalselt keritav filtririda.
+
+**21.10: Märguannete kasutusvoo täpsustamine**
+
+- Avalehe märguannete kaart ainult enne esimest kasutaja valikut.
+- Kaardi eemaldamine pärast nupule „Luba märguanded” vajutamist.
+- Eraldi „Märguanded” lüliti seadete vaates.
+- Märguannete valiku salvestamine seadmesse.
+- Võimalus seadete kaudu märguanded uuesti sisse või välja lülitada.
+- Praegune lahendus: kasutajaliidese prototüüp ja lokaalne valik, mitte
+  päris telefoni push-teavituste süsteem.
 
 ---
 
 **Praegune seis**
 
-- Esimene funktsionaalne veebipõhine prototüüp on olemas.
-- Teated ja sündmused on ühendatud eraldi väliste andmeallikatega.
-- Sündmuste kategooriafiltrid on realiseeritud.
-- Rakendusel on detailvaated, tumeda kujunduse tugi, veaolekud ja lokaalne
-  käivitamise lahendus.
-- PWA manifest ja service worker on lisatud.
+- Teate- ja sündmusevaated töötavad pärisandmetega.
+- Sündmuste kategooriafiltrid töötavad.
+- Detailvaated, tumeda kujunduse tugi ja veaolekud on olemas.
+- Rakendus töötab lokaalse serveri kaudu ja on avaldatav veebis.
+- PWA manifest ja service worker on olemas.
 - Avalik demo on olemas.
-- Meeldetuletus ja märguanded on praegu ainult prototüübi tasemel.
+- Meeldetuletus ja märguanded on veel prototüübi tasemel.
 
-**Järgmised arendussuunad**
+**Järgmised sammud**
 
-- Avalikus demos teadete laadimise probleemi uurimine.
-- Sündmuste kategooriafiltrite kontroll eri andmekategooriatega.
-- Päris meeldetuletuste tehnilise lahenduse valimine.
-- Androidi rakenduse aluse loomine.
-- Seadme tegelike märguannete ja meeldetuletuste lisamine.
+- Avaliku demo teadete laadimise probleemi lahendamine.
+- Päris meeldetuletuste tehnilise lahenduse valik.
+- Androidi äpi ülesehituse uurimine ja mobiilipaketi tehnilise aluse loomine.
+- Seadme päris märguannete ja meeldetuletuste lisamine.
 - Esitluseks loodud meeldetuletuse demo eemaldamine enne tootmiskasutust.
