@@ -170,3 +170,357 @@ erinevaid olekuid ning lisasin demo põhjal sündmuste kategooriafiltrid.
 
 Järgmise tööetapina jätkan mobiilirakenduse tehnilise lahenduse uurimisega,
 et valida olemasoleva prototüübi põhjal sobiv Androidi rakenduse ülesehitus.
+
+
+10.11.2026
+-----------
+Planeeritud maht: 8 tundi
+Korrigeeritud maht: 8 tundi
+
+Jätkasin veebiprototüübi viimist Androidi rakenduse suunas. Varasemalt loodud
+Capacitori projekt oli olemas ja Androidi debug-APK oli ehitatav, kuid
+rakenduse käivitamist ei olnud veel Androidi keskkonnas kontrollitud.
+
+Kõigepealt kontrollisin Androidi arenduskeskkonna valmisolekut. Build'i
+käigus selgus, et kasutatud Capacitori versioon vajab Java 21, mistõttu
+seadistasin build'i jaoks sobiva lokaalse Java keskkonna. Seejärel kontrollisin
+Android SDK olemasolu, paigaldasin vajalikud SDK tööriistad, Android API 35
+platvormi ja build-tools'id ning kinnitasin vajalikud litsentsid.
+
+Pärast keskkonna seadistamist ehitasin rakendusest debug-versiooni ning
+kontrollisin, et APK valmiks automaatselt koos ühise veebikihi
+sünkroonimisega. Seejärel paigaldasin Androidi emulaatori ja Android API 35
+Google APIs süsteemipildi. Lõin Pixel 5 virtuaalse seadme, käivitasin selle
+ning kontrollisin seadme nähtavust ADB kaudu.
+
+Paigaldasin loodud APK emulaatorisse ja käivitasin rakenduse. Kontrolli
+tulemusena töötasid rakenduse Androidi pakett ja `MainActivity`, mis näitas,
+et Capacitori Androidi projekt käivitub emulaatoris. Järgmise sammuna jätkan
+Androidi WebView sees rakenduse põhivaadete, navigeerimise ja väliste
+andmepäringute kontrollimisega.
+
+Jätkasin kontrolli Androidi WebView sees. Ühendasin emulaatori WebView
+debugimisega ning vaatasin üle rakenduse tegeliku HTML-i ja kasutajaliidese
+oleku. Kontrollisin, et välised teated ja sündmused jõuavad Androidi
+rakendusse, mitte ainult tavalisse töölauabrauserisse.
+
+Avades sündmuste vaate kontrollisin, et sündmuste nimekiri kuvatakse ning
+sündmuse kaardilt saab liikuda detailvaatesse. Detailvaates olid olemas
+sündmuse nimi, kuupäev, toimumiskoht, kellaaeg, algallika link ja
+meeldetuletuse demo-nupp. Vaadete vahetamine töötas edasi hash-põhise
+navigatsiooni kaudu.
+
+Kontrollimise käigus selgus, et praegusel hetkel ei olnud välisest teadete
+allikast aktiivseid tulevasi teateid. Seetõttu jäi avalehe aktiivsete teadete
+ala tühjaks, kuid hiljutised teated olid teadete vaates eraldi jaotises
+olemas. Seda eristasin laadimisveast, sest API vastus saabus edukalt ja
+sündmused laadisid korrektselt.
+
+Järgmise sammuna jätkan Androidi sees seadete, tumeda kujunduse, lokaalselt
+salvestatavate märguannete seadete ja meeldetuletuse demo kontrollimisega.
+
+Kontrollisin seejärel Androidi WebView sees seadete vaadet. Tume kujundus
+lülitus sisse ning märguannete valik salvestus lokaalselt. Pärast märguannete
+lubamist peitus avalehe märguannete kaart, mis näitas, et kasutaja valikut
+arvestatakse ka mobiilirakenduse sees. Kontrollisin ka, et vastavad väärtused
+salvestati `localStorage`-isse.
+
+10.11.2026 tööetappide jaotus
+-----------------------------
+
+Allolev jaotus täpsustab sama päeva töö sisu, et tegevusi oleks võimalik
+praktikapäevikus eraldi etappidena kasutada.
+
+Etapp 1 — Java ja Androidi arenduskeskkonna kontroll (1,5 tundi)
+
+Kontrollisin Node.js-i, npm-i, Java ja Androidi tööriistade olemasolu.
+Build'i proovimisel tuvastasin, et Java 25 ei sobinud kasutatud Gradle'i ja
+Capacitori kombinatsiooniga. Uurisin veateadet ning valisin build'i jaoks
+Java 21 kasutamise.
+
+Etapp 2 — Android SDK ja build'i eelduste seadistamine (1,5 tundi)
+
+Paigaldasin lokaalselt vajalikud Android SDK command-line tööriistad,
+Android API 35 platvormi, platform-tools'id ja build-tools'id. Kinnitasin
+SDK litsentsid ning seadistasin Androidi projekti SDK asukoha. Kontrollisin,
+et Gradle jõuaks Androidi projekti kompileerimiseni.
+
+Etapp 3 — esimese Androidi debug-versiooni ehitamine (1,5 tundi)
+
+Käivitasin ühise veebikihi sünkroonimise ja Androidi Gradle'i build'i.
+Analüüsisin kompileerimise käigus tekkinud Java versiooni probleemi,
+vahetasin build'i Java 21 peale ning ehitasin debug-APK edukalt valmis.
+Kontrollisin, et APK tekib oodatud väljundkausta.
+
+Etapp 4 — Androidi emulaatori ettevalmistamine (2 tundi)
+
+Paigaldasin Androidi emulaatori ja Android API 35 Google APIs süsteemipildi.
+Lõin Pixel 5 virtuaalse seadme nimega `Mulgi_Test`, käivitasin emulaatori
+ning ootasin Androidi täieliku käivitumiseni. Kontrollisin seadme nähtavust
+ADB kaudu.
+
+Etapp 5 — APK paigaldamine ja rakenduse põhikäivituse kontroll (1 tund)
+
+Paigaldasin debug-APK emulaatorisse ja käivitasin rakenduse paketiga
+`ee.mulgi.vald.teated`. Kontrollisin, et rakenduse protsess ja
+`MainActivity` töötavad.
+
+Etapp 6 — Androidi WebView ja väliste andmete kontroll (1,5 tundi)
+
+Ühendasin emulaatori WebView kaug-debugimisega ning kontrollisin rakenduse
+tegelikku HTML-i ja kasutajaliidese olekut. Kontrollisin teadete ja sündmuste
+API-de vastuseid, sündmuste nimekirja, detailvaadet ja hash-põhist
+navigatsiooni. Kontrollisin ka seadete vaadet, tumedat kujundust ning
+märguannete oleku salvestamist `localStorage`-isse.
+
+10.11.2026 esimese tööploki tulemus: 8 tundi
+---------------------------------------------
+
+Esimese tööploki lõpuks oli olemas ehitatav Androidi debug-APK, töötav
+Androidi emulaator ning kontrollitud rakenduse põhiline WebView-käivitumine,
+API-andmete laadimine, sündmuse detailvaade ja kasutaja seadete lokaalne
+salvestamine.
+
+10.11.2026 järgmine tööplokk
+----------------------------
+
+Etapp 7 — meeldetuletuse demo ja oleku säilimise kontroll (2 tundi)
+
+Kontrollisin Androidi WebView sees sündmuse detailvaates olevat meeldetuletuse
+demo-funktsiooni. Sündmuse avamisel sai vajutada meeldetuletuse nuppu ning
+rakendus kuvas kinnituse, et demo-meeldetuletus on lisatud.
+
+Seejärel laadisin rakenduse uuesti ning kontrollisin kasutaja varasemate
+seadete säilimist. Tume kujundus jäi aktiivseks, märguannete olek jäi
+salvestatuks ja avalehe märguannete kaart jäi peidetuks. Ühe vahepealse
+kontrolli käigus tekkis WebView kaug-debugimisel lehe uuesti laadimise tõttu
+vana JavaScripti kontekstiviga; ühendasin uue debug-konteksti ja kordasin
+kontrolli edukalt.
+
+Selle tööploki tulemusena on kinnitatud, et rakenduse kasutajaolek säilib
+Androidi WebView uuesti laadimisel ning sündmuse meeldetuletuse demo töötab.
+
+Etapp 8 — võrguühenduseta oleku kontroll ja parandused (2 tundi)
+
+Kontrollisin Androidi WebView's olukorda, kus väliste API-de päringud ei
+õnnestu. Esimesel kontrollil kuvati kasutajale tehniline teade `Failed to
+fetch`, mis ei olnud piisavalt arusaadav. Uurisin vea tekkimise põhjust ning
+täiendasin rakenduse veakäsitlust eestikeelse kasutajasõbraliku teatega.
+
+Paranduse kontrollimiseks ehitasin Androidi debug-APK uuesti, paigaldasin
+selle emulaatorisse ja simuleerisin WebView's võrguühenduse puudumist.
+Kontrolli tulemusel kuvati sisualades teade, et internetiühendus või
+andmeallikas ei ole kättesaadav ning kasutaja saab ühenduse taastamisel
+uuesti proovida.
+
+Selle kontrolli käigus parandasin ka buildiprotsessi. Selgus, et veebikihi
+muudatused ei jõudnud alati Androidi native-projekti, sest buildiskript ei
+käivitanud pärast failide kopeerimist Capacitori sünkroonimist. Lisasin
+automaatse `npx cap sync android` sammu ning kontrollisin, et muudatus jõuab
+uude APK-sse.
+
+
+13.11.2026
+----------
+
+Võrdlesin praktikapäevikus dokumenteeritud tegevusi failis
+`Real Product/40H-PRAKTIKA-PLAAN.md` kirjeldatud 40-tunnise praktikaplaaniga.
+Allolev kokkuvõte eristab tegevusi, mille kohta on päevikus konkreetne tõend,
+tegevusi, mida on käsitletud osaliselt, ning punkte, mille kohta päevikus
+teostust ei ole kinnitatud.
+
+Praktikaplaani 1. päeva põhieesmärgid on suures osas kaetud. Töö käigus
+analüüsisin olemasoleva veebirakenduse lähteülesannet, kasutusvooge,
+andmemudelit ja põhifunktsioone ning uurisin, kuidas olemasolev veebikiht
+mobiilirakenduse sees kasutada. Veebirakenduse, WebView-rakenduse ja
+native-rakenduse formaalne võrdlus ning ClickUp'i esimene töölogi ei ole
+praktikapäevikus eraldi dokumenteeritud.
+
+Praktikaplaani 2. päeva eesmärgid on põhiliselt tehtud. Kontrollisin
+Node.js-i, npm-i, Java ja Androidi tööriistu, seadistasin Java 21 kasutamise,
+paigaldasin Android SDK vajalikud osad ning korrastasin Capacitori Androidi
+projekti. Android Studio põhiseadete eraldi läbiminekut ei ole logis
+üksikasjalikult kirjeldatud, kuid Androidi emulaator ja SDK töövoog said
+praktiliselt seadistatud.
+
+Praktikaplaani 3. päeva eesmärgid on tehtud. Capacitori projektis olid vajalikud
+sõltuvused ja konfiguratsioon olemas, Androidi platvorm sai seadistatud ning
+esimene debug-APK valmis edukalt. Java versiooni probleem sai tuvastatud ja
+lahendatud Java 21 kasutamisega.
+
+Praktikaplaani 4. päeva eesmärgid on tehtud. Olemasolev veebikiht töötab
+Capacitori Androidi rakenduses, APK sai emulaatorisse paigaldatud ja käivitatud
+ning kontrollisin navigeerimist, teateid, sündmusi, detailvaadet, API-andmete
+laadimist, seadete salvestamist ja WebView käitumist. Lisaks kontrollisin
+võrguühenduse puudumise olukorda ning parandasin kasutajale kuvatavat veateadet.
+
+Praktikaplaani 5. päeva eesmärgid on osaliselt tehtud. Rakendust käivitati
+korduvalt, parandati buildiprotsessi ning kontrolliti kasutajaoleku säilimist,
+tumedat kujundust ja meeldetuletuse demo-funktsiooni. Samuti uurisin Androidi
+ja iOS-i erinevusi järgmise etapi vaatenurgast. Eraldi erinevate
+ekraanisuuruste kontrolli, README ja roadmap'i täiendamist, täielikku
+praktikaetapi lõppkokkuvõtet ning ClickUp'i dokumentatsiooni ei ole selles
+päevikus veel kinnitatud.
+
+Praktikaplaanis teadlikult 40 tunni sisse mitte arvestatud töid ei ole
+tehtuks märgitud. Päris push-teavitusi, kalendriintegratsiooni, kasutajakontot,
+poe avaldamist, kogu kasutajaliidese native-tehnoloogiasse ümberkirjutamist,
+Windowsis tehtavat iOS-i build'i ega tootmiskõlbulikku offline-andmebaasi
+praeguses etapis ei ole valmis tehtud.
+
+Kokkuvõttes on praktikaplaanist reaalselt olemas töötav Androidi Capacitori
+prototüüp koos emulaatori, debug-APK, WebView kontrolli, väliste andmete,
+seadete, meeldetuletuse demo ja võrguvea käsitlusega. Täielikult lõpetatuks
+ei saa veel lugeda dokumentatsiooni- ja iOS-iga seotud punkte, sest nende
+kohta puudub käesolevas logis piisav teostuse tõend.
+
+
+16.11.2026
+----------
+
+Paigaldasin värske Androidi debug-APK USB kaudu füüsilisse Androidi telefoni
+ning kontrollisin rakenduse põhikäitumist päris seadmes. APK ehitus, paigaldus
+ja rakenduse käivitamine õnnestusid.
+
+Telefoni testimise tulemused:
+
+- avaleht laadis edukalt;
+- sündmuste vaade laadis edukalt;
+- sündmuse detailvaade avanes;
+- sündmuste kategooriafiltrid töötasid;
+- seadete vaade töötas;
+- tume kujundus säilis pärast rakenduse sulgemist ja uuesti avamist;
+- märguannete valik säilis;
+- rakendus nägi telefoni ekraanil visuaalselt korrektne välja;
+- väliste andmete laadimiseks oli vaja internetiühendust.
+
+Sündmuste vaate „Värskeimad teated” ala jäi tühjaks, sest andmeallikas ei
+andnud kontrollimise hetkel sinna aktiivseid kirjeid. Seda ei käsitleta
+rakenduse laadimisveana.
+
+Kontrollimise käigus selgus ka, et rakenduses puudub eraldi rakendusesisene
+tagasi-nupp. Praegu ei takistanud see kontrollitud põhivoogude kasutamist,
+kuid järgmises viimistlusetapis tuleb otsustada, kas lisada vaadetele
+rakendusesisene tagasi-liikumine või toetuda Androidi süsteemi tagasi-nupule.
+
+Füüsilise telefoni test kinnitas, et praegune Androidi prototüüp ei tööta
+ainult emulaatoris, vaid käivitub ja põhifunktsioonid töötavad ka päris
+seadmes.
+
+
+16.11.2026 — kohaliku meeldetuletuse esimene versioon
+-------------------------------------------------------
+
+Asendasin sündmuse detailvaates olnud meeldetuletuse demo Androidi kohaliku
+meeldetuletusega. Kasutaja saab valida, kas teavitus tuleb 10 minutit,
+30 minutit, 1 tund või 1 päev enne sündmuse algust. Lisaks saab valida täpse
+kuupäeva ja kellaaja.
+
+Meeldetuletus kasutab Capacitori Local Notifications pluginat ning salvestub
+telefoni ajastatud kohaliku märguandena. See ei vaja eraldi serverit ega
+pidevat internetiühendust pärast meeldetuletuse seadistamist. Androidi
+teavituste luba küsitakse esimesel kasutamisel.
+
+Lisatud funktsiooni kontrollimisel:
+
+- brauseri- ja Androidi build õnnestusid;
+- olemasolevad sündmuse detailvaate ja meeldetuletuse testid läbisid;
+- Local Notifications plugin leiti Androidi projektis ja native build kaasas
+  selle edukalt;
+- värske APK paigaldati USB kaudu füüsilisse Androidi telefoni.
+
+Järgmine praktiline kontroll on valida telefonis lähiajal toimuv sündmus,
+valida täpne aeg mõni minut tulevikku, lubada märguanded ning kontrollida,
+et teavitus ilmub ka pärast rakenduse sulgemist.
+
+Meeldetuletuse esimesel telefonikontrollil ei olnud märguanne kohe nähtavana,
+kuid Androidi süsteemilogist selgus, et alarm käivitus ja teavitus postitati.
+Probleem oli Androidi vaikimisi teavituste kanalis, mille bänneri kuvamine oli
+seadme kanaliseadetes keelatud. Selle parandamiseks lisasin sündmuste
+meeldetuletustele eraldi kõrgema tähtsusega teavituste kanali, millel on
+vibreerimine ja nähtavus lubatud. Uus APK ehitati ja paigaldati telefoni.
+
+Järgmisel telefonikontrollil jäi teavitus siiski nähtavaks alles pärast
+rakenduse avamist. Androidi alarmilogist oli näha, et ajastus käivitus, kuid
+telefon võis rakenduse passiivses olekus alarmi edasi lükata. Lisasin
+meeldetuletuse ajastamisele `allowWhileIdle` seadistuse, et teavitus saaks
+käivituda ka lukustatud või Doze-olekus seadmes. Ehitasin ja paigaldasin
+uuendatud APK ning järgmine kontroll tuleb teha uue meeldetuletusega.
+
+Kordustest õnnestus: uue meeldetuletuse teavitus tuli telefonis läbi ka siis,
+kui rakendus oli suletud ja telefon passiivses olekus. See kinnitas, et
+meeldetuletuse ajastus, Androidi teavituste kanal ja `allowWhileIdle`
+seadistus töötavad füüsilises seadmes koos ootuspäraselt.
+
+Korrastasin ka rakenduse navigatsiooni. Eemaldasin päisest eraldi seadete
+hammasratta, sest seadete vaade oli juba alumises navigatsioonis olemas.
+Nüüd on seadetele üks selge sisenemistee ning kasutajaliides ei dubleeri sama
+funktsiooni kahe nupuga. Pärast muudatust läbisid kõik 33 automaattesti.
+
+Kujunduse kontrollnimekiri:
+
+- [ ] Fondi suuruste järjepidevus kõigis vaadetes
+- [ ] Pealkirjade ja põhiteksti kaalude tasakaal
+- [ ] Kaartide nurkade ja sisemiste vahede ühtsus
+- [ ] Ikoonide stiili järjepidevus
+- [ ] Väikeste tekstide loetavus mõlemas teemas
+
+Kontrollnimekirja ei märgitud lõpuni tehtuks, sest visuaalsel ülevaatusel
+selgus, et fondisuuruste, tekstikaalude, kaardivahede ja väikeste tekstide
+järjepidevuses on veel parandamist vajavaid kohti.
+
+Sündmuste kuupäevakuva täpsustasin algus- ja lõppkuupäeva põhjal:
+
+- ühepäevane sündmus: `13. november`;
+- mitmepäevane sündmus: `13.-15. november`;
+- pikaajaline sündmus: `26. okt - 26. nov`.
+
+Pikaajaliseks loetakse praegu üle seitsme kalendripäeva kestev sündmus.
+Detailvaates kuvatakse lisaks kuupäevavahemikule ka sündmuse tüüp.
+
+Kontrollimisel selgus, et Kultuurikava API kohandab käimasoleva sündmuse
+alguskuupäeva päringus kasutatud `date` väärtuse järgi. Kuna rakendus küsis
+ainult viimase 7 päeva andmeid, kuvati pikaajalise sündmuse „Mõnus sahin
+sammudes” alguseks hilisem kuupäev kui Kultuurikava originaalil. Esmane katse
+muuta andmepäringu algusaken 90 päeva peale ei olnud selle API puhul sobiv:
+API ei käsitle `date` ja `enddate` väärtusi tavapärase sündmuste vahemikuna,
+vaid tagastas 90 päeva taguse kuupäeva sündmused. Selle tulemusena olid kõik
+rakenduse sündmused juba möödunud ja avaleht ning sündmuste vaade jäid tühjaks.
+Taastasin päringu tänasele ajale lähedaseks (7 päeva tagasi), et praegused
+sündmused jääksid nähtavaks. Pikaajaliste sündmuste tegeliku alguskuupäeva
+säilitamiseks tuleb kasutada eraldi sündmuse detailandmeid, mitte laiendada
+üldpäringu kuupäevaakent.
+
+16.11.2026 täpsustasin teadete ja sündmuste kuvamist. WordPressi postituse
+URL-i lõpus olev number ei ole sündmuse kuupäev; rakendus kasutab aktiivsete
+teadete määramisel postituse avaldamisaega ning viimase 7 päeva teated jäävad
+aktiivsesse nimekirja. Sündmuste kaartidele lisasin kuupäevale piisava laiuse,
+et kuupäevavahemik ei kataks sündmuse teksti.
+
+Kultuurikava API nihutab käimasoleva sündmuse algust päringu kuupäeva järgi.
+Ühendasin tänase sündmuste päringu varasema kontrollpäringuga sündmuse ID
+alusel, et pikaajalise sündmuse algus ei jääks päringu kuupäevaks. Testid
+läbisid 36/36 ning parandatud APK paigaldati telefoni.
+
+Selgus veel, et Kultuurikava widget tagastab ühe päringu kohta ainult väikese
+järgmiste sündmuste ploki. Seetõttu ei olnud hilisemad novembri sündmused
+rakenduses nähtavad. Lisasin järjestikused päringupunktid 21 päeva tagasi kuni
+84 päeva ette ning ühendan tulemused sündmuse ID järgi. Nii kuvatakse ka
+17.-29. novembri sündmused ja duplikaadid eemaldatakse.
+
+
+
+Leitud probleem! 
+
+KONTROLLI!!! Sündmused ei kuva kõik --- probleem võib seisneda ürituste kategoriseerimises, 
+kategooriate teisendamisel läheb mitme kategooriaga sündmuste info kaduma. 
+Kontrolli JSON-ist categories välja
+SAMUTI "KÕIK" kategooria peaks ikkagi näitama kõiki üritusi, ilma categories välja lugemata
+
+25.11.2026 kontrollisin Kultuurikava API toor-JSON-i. Näiteks „Mulgi Pudru
+festival” tagastas kategooriad „Mess ja laat” ning „Rahvakultuur”. Rakendus
+kasutas seni ainult esimest kategooriat, mistõttu teise kategooria filter ei
+leidnud seda sündmust. Muutsin kategooriate teisenduse mitut kategooriat
+säilitavaks ning jätsin „Kõik” filtri kategooriate olemasolust sõltumatuks.
+Kategooriata sündmus paigutatakse jätkuvalt „Varia” alla. Lisasin automaattesti
+mitme kategooria ja puuduva kategooria juhtudele.

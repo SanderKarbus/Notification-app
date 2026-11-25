@@ -49,6 +49,34 @@ const formatEventTime = (timestamp) => new Intl.DateTimeFormat("et-EE", {
   minute: "2-digit"
 }).format(new Date(timestamp * 1000));
 
+const formatEventRange = (startTimestamp, endTimestamp) => {
+  const start = new Date(startTimestamp * 1000);
+  const end = new Date(endTimestamp * 1000);
+  const startDay = Date.UTC(start.getFullYear(), start.getMonth(), start.getDate());
+  const endDay = Date.UTC(end.getFullYear(), end.getMonth(), end.getDate());
+  const dayCount = Math.round((endDay - startDay) / 86400000) + 1;
+  const longMonth = new Intl.DateTimeFormat("et-EE", { month: "long" }).format(start);
+  const startMonth = new Intl.DateTimeFormat("et-EE", { month: "short" }).format(start).replace(".", "");
+  const endMonth = new Intl.DateTimeFormat("et-EE", { month: "short" }).format(end).replace(".", "");
+  const sameMonth = start.getFullYear() === end.getFullYear() && start.getMonth() === end.getMonth();
+
+  if (dayCount === 1) {
+    return { type: "Ühepäevane", label: `${start.getDate()}. ${longMonth}` };
+  }
+  if (dayCount > 7) {
+    return {
+      type: "Pikaajaline",
+      label: `${start.getDate()}. ${startMonth} - ${end.getDate()}. ${endMonth}`
+    };
+  }
+  return {
+    type: "Mitmepäevane",
+    label: sameMonth
+      ? `${start.getDate()}.-${end.getDate()}. ${longMonth}`
+      : `${start.getDate()}. ${startMonth} - ${end.getDate()}. ${endMonth}`
+  };
+};
+
 const mapNotice = (post) => ({
   id: `notice-${post.id}`,
   title: decodeHtml(post.title.rendered),
@@ -63,17 +91,25 @@ const mapNotice = (post) => ({
 const mapEvent = (event) => {
   const date = formatEventDate(event.time.start);
   const endTimestamp = event.time.end || event.time.start;
-  const sourceCategory = event.categories?.find((category) => category.name_nat)?.name_nat;
-  const category = sourceCategory === "Pidu ja Klubi" ? "Meelelahutus" : sourceCategory;
+  const dateRange = formatEventRange(event.time.start, endTimestamp);
+  const categories = [...new Set((Array.isArray(event.categories) ? event.categories : [])
+    .map((category) => category?.name_nat)
+    .filter(Boolean)
+    .map((category) => category === "Pidu ja Klubi" ? "Meelelahutus" : category)
+    .filter((category) => EVENT_CATEGORIES.includes(category)))];
+  if (categories.length === 0) categories.push("Varia");
   return {
     id: `event-${event.id}`,
     day: date.day,
     month: date.month,
+    dateLabel: dateRange.label,
+    eventType: dateRange.type,
     title: event.name,
     place: event.time.place.name,
     time: formatEventTime(event.time.start),
     description: `${event.name} toimub kohas ${event.time.place.name}.`,
-    category: EVENT_CATEGORIES.includes(category) ? category : "Varia",
+    category: categories[0],
+    categories,
     sourceUrl: `https://www.kultuurikava.ee${event.internalurl}`,
     date: date.iso,
     endDateIso: new Date(endTimestamp * 1000).toISOString(),
@@ -81,26 +117,48 @@ const mapEvent = (event) => {
   };
 };
 
+const eventRequestUrl = (date) => `${MULGI_SOURCES.events}&date=${encodeURIComponent(date.toISOString())}&enddate=${encodeURIComponent(new Date(Date.now() + 90 * 86400000).toISOString())}`;
+
+const eventQueryOffsets = [-21, -7, 0, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84];
+
+const mergeEvents = (eventLists) => {
+  const merged = new Map();
+  eventLists.flat().forEach((event) => {
+    const existing = merged.get(event.id);
+    if (!existing) {
+      merged.set(event.id, event);
+      return;
+    }
+    if (event.time.start < existing.time.start) existing.time.start = event.time.start;
+    if (event.time.end > existing.time.end) existing.time.end = event.time.end;
+  });
+  return [...merged.values()];
+};
+
 const loadMulgiAppData = async () => {
   const controller = new AbortController();
   const timeout = window.setTimeout(() => controller.abort(), 15000);
   const requestOptions = { signal: controller.signal };
-  const [noticeResponse, eventResponse] = await Promise.all([
+  const eventDates = eventQueryOffsets.map((offset) => new Date(Date.now() + offset * 86400000));
+  const [noticeResponse, ...eventResponses] = await Promise.all([
     fetch(MULGI_SOURCES.notices, requestOptions),
-    fetch(`${MULGI_SOURCES.events}&date=${encodeURIComponent(new Date(Date.now() - 7 * 86400000).toISOString())}&enddate=${encodeURIComponent(new Date(Date.now() + 90 * 86400000).toISOString())}`, requestOptions)
+    ...eventDates.map((date) => fetch(eventRequestUrl(date), requestOptions))
   ]).finally(() => window.clearTimeout(timeout));
 
   if (!noticeResponse.ok) throw new Error(`Teadete allikas vastas veaga (${noticeResponse.status}).`);
-  if (!eventResponse.ok) throw new Error(`Sündmuste allikas vastas veaga (${eventResponse.status}).`);
+  const failedEventResponse = eventResponses.find((response) => !response.ok);
+  if (failedEventResponse) throw new Error(`Sündmuste allikas vastas veaga (${failedEventResponse.status}).`);
 
   const posts = await noticeResponse.json();
-  const eventPayload = await eventResponse.json();
-  const events = eventPayload?.data?.events?.results;
-  if (!Array.isArray(posts) || !Array.isArray(events)) throw new Error("Veebiallikate vastus ei olnud oodatud kujul.");
+  const eventPayloads = await Promise.all(eventResponses.map((response) => response.json()));
+  const eventLists = eventPayloads.map((payload) => payload?.data?.events?.results);
+  if (!Array.isArray(posts) || eventLists.some((events) => !Array.isArray(events))) {
+    throw new Error("Veebiallikate vastus ei olnud oodatud kujul.");
+  }
 
   return {
     notices: posts.map(mapNotice).sort((a, b) => b.dateIso.localeCompare(a.dateIso)),
-    events: events.map(mapEvent).sort((a, b) => a.date.localeCompare(b.date)),
+    events: mergeEvents(eventLists).map(mapEvent).sort((a, b) => a.date.localeCompare(b.date)),
     sources: MULGI_SOURCES
   };
 };

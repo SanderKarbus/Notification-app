@@ -17,7 +17,6 @@
         <img src="Mulgi_valla_vapp.svg.webp" alt="Mulgi valla vapp">
         <span><strong>Mulgi vald</strong><small>Teated ja sündmused</small></span>
       </a>
-      <button class="icon-button" id="notificationButton" aria-label="Ava seaded">⚙</button>
     </header>
 
     <main>
@@ -62,8 +61,8 @@
         </div>
         <div class="feed feed-large" id="noticeFeed"></div>
         <div class="archive-heading">
-          <h2>Hiljutised teated</h2>
-          <p>Viimase 7 päeva teated</p>
+          <h2>Vanemad teated</h2>
+          <p>Üle 7 päeva vanad teated</p>
         </div>
         <div class="feed feed-large recent-feed" id="recentNoticeFeed"></div>
       </section>
@@ -117,6 +116,8 @@
       <a href="#settings" data-nav="settings"><span>☼</span>Seaded</a>
     </nav>
   </div>
+  <script src="capacitor.js"></script>
+  <script src="local-notifications.js"></script>
   <script src="data.js"></script>
   <script src="app.js"></script>
   <script>
