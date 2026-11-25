@@ -119,7 +119,7 @@ const mapEvent = (event) => {
 
 const eventRequestUrl = (date) => `${MULGI_SOURCES.events}&date=${encodeURIComponent(date.toISOString())}&enddate=${encodeURIComponent(new Date(Date.now() + 90 * 86400000).toISOString())}`;
 
-const eventQueryOffsets = [-21, -7, 0, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84];
+const eventQueryOffsets = [-31, -7, 0, 7, 14, 21, 28, 35, 42, 49, 56, 63, 70, 77, 84];
 
 const mergeEvents = (eventLists) => {
   const merged = new Map();

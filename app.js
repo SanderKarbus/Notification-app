@@ -154,7 +154,7 @@ const renderDetail = (type, id) => {
       </select>
       <div class="reminder-custom" id="reminderCustom" hidden>
         <label class="reminder-label" for="reminderCustomTime">Täpset aega</label>
-        <input class="reminder-input" id="reminderCustomTime" type="datetime-local">
+        <input class="reminder-input" id="reminderCustomTime" type="datetime-local" lang="et-EE">
       </div>
       <button class="primary-button reminder-button" type="button">Lisa meeldetuletus</button>
     </div>`;

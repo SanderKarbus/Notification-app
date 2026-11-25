@@ -119,6 +119,23 @@ test.describe("NotificationAPPi põhivood", () => {
     await expect(page.locator("#eventList")).toContainText("Mitme kategooriaga festival");
   });
 
+  test("pärib sündmusi ka 31 päeva tagasi ja lokaliseerib meeldetuletuse kalendri eesti keelde", async ({ page }) => {
+    const eventQueryDates = [];
+    page.on("request", (request) => {
+      if (!request.url().includes("/widget/")) return;
+      const date = new URL(request.url()).searchParams.get("date");
+      if (date) eventQueryDates.push(new Date(date).getTime());
+    });
+    await openApp(page);
+    expect(eventQueryDates.some((date) =>
+      Math.abs(Date.now() - date - 31 * 86400000) < 5000
+    )).toBe(true);
+
+    await page.locator("#homeEvents .event-card").click();
+    await page.locator("#reminderOffset").selectOption("custom");
+    await expect(page.locator("#reminderCustomTime")).toHaveAttribute("lang", "et-EE");
+  });
+
   test("testib märguannete lülitamist ja rakenduse uuesti avamist", async ({ page }) => {
     await openApp(page);
     await page.locator("#enableNotifications").click();

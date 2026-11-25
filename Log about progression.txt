@@ -524,3 +524,8 @@ leidnud seda sündmust. Muutsin kategooriate teisenduse mitut kategooriat
 säilitavaks ning jätsin „Kõik” filtri kategooriate olemasolust sõltumatuks.
 Kategooriata sündmus paigutatakse jätkuvalt „Varia” alla. Lisasin automaattesti
 mitme kategooria ja puuduva kategooria juhtudele.
+
+25.11.2026 pikendasin Kultuurikava ajaloolist sündmuste kontrollpäringut
+31 päeva taha. Kontrollisin API-st, et 25.10.2026 päring säilitab sündmuse
+„Mõnus sahin sammudes” tegeliku 26.10.2026 alguse. Määrasin kasutaja valitud
+meeldetuletuse kuupäeva/kellaaja väljale eesti keele lokaadi (`et-EE`).
